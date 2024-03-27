@@ -1,0 +1,41 @@
+# Parameter example
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create an EC2 instance and output its public IP address
+
+Parameters: 
+  MyKeyName: 
+    Description: select key from available keys
+    Type: "AWS::EC2::KeyPair::KeyName"
+  
+  InstanceType: 
+    Type: 'AWS::SSM::Parameter::Value<String>'  #if the value is comming from parameter store use this
+    # if you want to select the value manually use the below snippet (we can control type using allowed values)
+    # Type: String
+    # Default: t2.micro
+    # AllowedValues: 
+    #   - t2.micro
+    #   - t3.micro
+    
+
+Resources:
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0ed90a3b5bde5e371 
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref MyKeyName
+      SecurityGroups:
+        - Ref: MySecurityGroup  
+      AvailabilityZone: ca-central-1a
+
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH access
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0  
+

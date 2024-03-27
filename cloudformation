@@ -1,0 +1,98 @@
+start creating your first template
+
+template: 
+A CloudFormation template is a JSON or YAML formatted text file. 
+You can save these files with any extension, such as .json, .yaml, .template, or .txt. 
+CloudFormation uses these templates as blueprints for building your AWS resources.
+
+stack:
+When you use CloudFormation, you manage related resources as a single unit called a stack. 
+You create, update, and delete a collection of resources by creating, updating, and deleting stacks. 
+All the resources in a stack are defined by the stack's CloudFormation template
+Suppose you created a template that includes an Auto Scaling group, Elastic Load Balancing load balancer,
+and an Amazon Relational Database Service (Amazon RDS) database instance. To create those resources, 
+you create a stack by submitting the template that you created, and CloudFormation provisions all those resources for you.
+
+
+changeset:
+If you need to make changes to the running resources in a stack, you update the stack. 
+Before making changes to your resources, you can generate a change set, which is a summary of 
+your proposed changes. Change sets allow you to see how your changes might impact your running 
+resources, especially for critical resources, before implementing them.
+
+Resources referance
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
+
+all resources are available here
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+
+ec2 instance
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-instance.html
+
+Resources
+  MyInstance: 
+    Type: AWS::EC2::Instance
+    Properties:
+       ImageId: ami-0ed90a3b5bde5e371
+       InstanceType: t2.micro
+       KeyName: Ansible
+       AvailabilityZone: ca-central-1a
+
+
+3 ways to create stack
+
+1: from UI
+go to cloudformation dashboard uplaod teplmate and create stack
+
+
+2: Using AWS CLI
+
+install aws cli
+configure profile
+aws configure --profile abc
+
+to create stack
+aws cloudformation delete-stack --profile=nk --stack-name myteststack --template-body file://template.yaml
+
+to delete stack
+aws cloudformation create-stack --profile=nk --stack-name myteststack 
+
+3: using Create stack API
+
+
+
+We can add resources in a diagram and generate template as required
+https://console.aws.amazon.com/cloudformation/designer
+
+working with desiner.
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/working-with-templates-cfn-designer-overview.html
+
+
+All the different things you can do and sysntax about template
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-reference.html
+
+terraform vs cloudformation
+https://www.toptal.com/terraform/terraform-vs-cloudformation
+
+
+troubelshooting
+what to do if stack creation gets stuck
+https://repost.aws/knowledge-center/cloudformation-stack-stuck-progress
+
+
+Home work
+create webserver on EC2 and deploy it using cfn, walkthrough
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/updating.stacks.walkthrough.html
+
+
+
+
+CICD pipeline using azuredevops and terraform
+https://dev.to/aws-builders/provisioning-infrastructure-on-aws-using-azure-devops-3g75
+find out extention required and create service connection, add steps to create stack
+
+
+CICD pipeline using Jenkins
+figureout steps required 
+dependancies and installtion on master sever to deploy stack
+
