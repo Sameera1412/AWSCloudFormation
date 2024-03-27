@@ -8,7 +8,7 @@ pipeline {
     stages {
       stage('fetch_latest_code') {
         steps {
-        git branch: 'master', url: 'https://github.com/Sameera1412/AWSCloudFormation/blob/main/ec2.yaml'
+        git branch: 'main', url: 'https://github.com/Sameera1412/AWSCloudFormation/blob/main/ec2.yaml'
         }
       }
       stage('create stack'){
