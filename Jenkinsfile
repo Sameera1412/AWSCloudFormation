@@ -8,12 +8,12 @@ pipeline {
     stages {
       stage('fetch_latest_code') {
         steps {
-        git branch: 'main', url: 'https://github.com/Sameera1412/AWSCloudFormation/blob/main/ec2.yaml'
+        git branch: 'main', url: 'https://github.com/Sameera1412/AWSCloudFormation/blob/main/template1.yaml'
         }
       }
       stage('create stack'){
         steps{
-            sh "aws cloudformation create-stack --stack-name CFJenkins –template-body file://ec2.yaml"
+            sh "aws cloudformation create-stack --stack-name CFJenkins –template-body file://template1.yaml"
         }
       }
     }
